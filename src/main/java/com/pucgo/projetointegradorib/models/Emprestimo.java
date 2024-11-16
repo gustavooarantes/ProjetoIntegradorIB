@@ -1,5 +1,6 @@
 package com.pucgo.projetointegradorib.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,8 +22,9 @@ public class Emprestimo {
     private Livro livroEmprestimo;
 
     @Column(nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyy HH:mm:ss")
     private LocalDate dataEmprestimo;
 
     @Column(nullable = false)
-    private String statusEmprestimo; // ativo, finalizado ou atrasado
+    private String statusEmprestimo; // ativo, finalizado
 }

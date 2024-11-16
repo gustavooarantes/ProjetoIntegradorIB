@@ -1,5 +1,6 @@
 package com.pucgo.projetointegradorib.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,8 +22,9 @@ public class Reserva {
     private Livro livroReserva;
 
     @Column(nullable = false)
-    private String statusReserva; // iniciada, finalizada, expirada
+    private String statusReserva; // iniciada, finalizada
 
     @Column(nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyy HH:mm:ss")
     private LocalDate dataReserva;
 }

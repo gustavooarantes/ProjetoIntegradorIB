@@ -1,5 +1,6 @@
 package com.pucgo.projetointegradorib.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,5 +23,6 @@ public class Usuario {
 
     private String telefoneUsuario;
 
+    @JsonFormat(pattern = "dd/MM/yyy HH:mm:ss")
     private LocalDate dataCadastroUsuario;
 }
