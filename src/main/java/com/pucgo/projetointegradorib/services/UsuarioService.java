@@ -1,5 +1,6 @@
 package com.pucgo.projetointegradorib.services;
 
+import com.pucgo.projetointegradorib.models.Autor;
 import com.pucgo.projetointegradorib.models.Emprestimo;
 import com.pucgo.projetointegradorib.models.Reserva;
 import com.pucgo.projetointegradorib.models.Usuario;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +22,11 @@ public class UsuarioService {
 
     @Autowired
     private ReservaService reservaService;
+
+    // Lista todos os usuarios
+    public List<Usuario> listarUsuarios() {
+        return usuarioRepository.findAll();
+    }
 
     public Usuario cadastrarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);

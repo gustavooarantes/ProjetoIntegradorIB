@@ -1,6 +1,7 @@
 package com.pucgo.projetointegradorib.controllers;
 
 import com.pucgo.projetointegradorib.models.Emprestimo;
+import com.pucgo.projetointegradorib.models.Livro;
 import com.pucgo.projetointegradorib.models.Reserva;
 import com.pucgo.projetointegradorib.models.Usuario;
 import com.pucgo.projetointegradorib.services.UsuarioService;
@@ -9,11 +10,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
+
+    @GetMapping
+    public ResponseEntity<List<Usuario>> listarUsuarios() {
+        return ResponseEntity.ok(usuarioService.listarUsuarios());
+    }
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody Usuario usuario) {
