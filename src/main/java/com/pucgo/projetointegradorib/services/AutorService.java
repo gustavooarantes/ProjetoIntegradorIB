@@ -26,6 +26,6 @@ public class AutorService {
     // Busca um autor por seu id
     public Autor buscarPorId(Long id) {
         return autorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Livro não encontrado com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Autor não encontrado com ID: " + id));
     }
 }
