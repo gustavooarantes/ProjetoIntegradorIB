@@ -8,23 +8,24 @@ import java.time.LocalDate;
 
 @Data
 @Entity
+@Table(name = "Reservas")
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReserva;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Usuario", nullable = false)
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuarioReserva;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Livro", nullable = false)
+    @JoinColumn(name = "idLivro", nullable = false)
     private Livro livroReserva;
 
     @Column(nullable = false)
     private String statusReserva; // iniciada, finalizada
 
     @Column(nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyy HH:mm:ss")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataReserva;
 }

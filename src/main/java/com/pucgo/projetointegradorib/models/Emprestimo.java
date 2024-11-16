@@ -8,21 +8,22 @@ import java.time.LocalDate;
 
 @Data
 @Entity
+@Table(name = "Emprestimos")
 public class Emprestimo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEmprestimo;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Usuario", nullable = false)
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuarioEmprestimo;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Livro", nullable = false)
+    @JoinColumn(name = "idLivro", nullable = false)
     private Livro livroEmprestimo;
 
     @Column(nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyy HH:mm:ss")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataEmprestimo;
 
     @Column(nullable = false)

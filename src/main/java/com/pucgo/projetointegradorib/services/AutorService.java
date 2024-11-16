@@ -18,6 +18,11 @@ public class AutorService {
         return autorRepository.findAll();
     }
 
+    // Cadastra um autor
+    public Autor cadastrarAutor(Autor autor) {
+        return autorRepository.save(autor);
+    }
+
     // Busca um autor por seu id
     public Autor buscarPorId(Long id) {
         return autorRepository.findById(id)

@@ -1,6 +1,9 @@
 package com.pucgo.projetointegradorib.controllers;
 
+import com.pucgo.projetointegradorib.dtos.EmprestimoRequestDTO;
 import com.pucgo.projetointegradorib.models.Emprestimo;
+import com.pucgo.projetointegradorib.models.Livro;
+import com.pucgo.projetointegradorib.models.Usuario;
 import com.pucgo.projetointegradorib.services.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +17,11 @@ public class EmprestimoController {
     private EmprestimoService emprestimoService;
 
     @PostMapping("/criar")
-    public ResponseEntity<Emprestimo> criarEmprestimo(@RequestParam Long idLivro, @RequestParam Long idUsuario) {
+    public ResponseEntity<Emprestimo> criarEmprestimo(@RequestBody EmprestimoRequestDTO requestDTO) {
         try {
-            Emprestimo novoEmprestimo = emprestimoService.criarEmprestimo(idLivro, idUsuario);
+            Livro livro = requestDTO.getLivro();
+            Usuario usuario = requestDTO.getUsuario();
+            Emprestimo novoEmprestimo = emprestimoService.criarEmprestimo(livro, usuario);
             return new ResponseEntity<>(novoEmprestimo, HttpStatus.CREATED);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

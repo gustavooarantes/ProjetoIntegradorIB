@@ -22,4 +22,9 @@ public class EditoraService {
         return editoraRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Editora não encontrada com ID: " + id));
     }
+
+    // Cadastrar uma editora
+    public Editora cadastrarEditora(Editora editora) {
+        return editoraRepository.save(editora);
+    }
 }

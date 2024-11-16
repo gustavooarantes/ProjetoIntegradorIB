@@ -37,28 +37,28 @@ public class ReservaService {
 
     // Cria uma nova reserva
     @Transactional
-    public Reserva criarReserva(Long idLivro, Long idUsuario) {
-        Optional<Livro> livroOptional = livroRepository.findById(idLivro);
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
+    public Reserva criarReserva(Livro livro, Usuario usuario) {
+        Optional<Livro> livroOptional = livroRepository.findById(livro.getIdLivro());
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getIdUsuario());
 
         if (livroOptional.isEmpty() || usuarioOptional.isEmpty()) {
             throw new RuntimeException("Livro ou usuário não encontrado");
         }
 
-        Livro livro = livroOptional.get();
-        Usuario usuario = usuarioOptional.get();
+        Livro livroReserva = livroOptional.get();
+        Usuario usuarioReserva = usuarioOptional.get();
 
-        if (livro.estaEmprestadoLivro() || livro.estaReservadoLivro()) {
+        if (livroReserva.estaEmprestadoLivro() || livroReserva.estaReservadoLivro()) {
             throw new RuntimeException("Livro não está disponível para reserva");
         }
 
         // Atualiza o status de reserva do livro para "Reservado"
-        livro.setReservadoLivro(true);
-        livroRepository.save(livro);
+        livroReserva.setReservadoLivro(true);
+        livroRepository.save(livroReserva);
 
         Reserva reserva = new Reserva();
-        reserva.setLivroReserva(livro);
-        reserva.setUsuarioReserva(usuario);
+        reserva.setLivroReserva(livroReserva);
+        reserva.setUsuarioReserva(usuarioReserva);
         reserva.setStatusReserva("Em andamento");
         reserva.setDataReserva(java.time.LocalDate.now());
 

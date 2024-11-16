@@ -22,4 +22,9 @@ public class GeneroService {
         return generoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Gênero não encontrado com ID: " + id));
     }
+
+    // Cadastrar um gênero
+    public Genero cadastrarGenero (Genero genero) {
+        return generoRepository.save(genero);
+    }
 }

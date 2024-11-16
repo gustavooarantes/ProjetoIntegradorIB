@@ -37,28 +37,28 @@ public class EmprestimoService {
 
     // Cria um novo empréstimo
     @Transactional
-    public Emprestimo criarEmprestimo(Long idLivro, Long idUsuario) {
-        Optional<Livro> livroOptional = livroRepository.findById(idLivro);
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
+    public Emprestimo criarEmprestimo(Livro livro, Usuario usuario) {
+        Optional<Livro> livroOptional = livroRepository.findById(livro.getIdLivro());
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getIdUsuario());
 
         if (livroOptional.isEmpty() || usuarioOptional.isEmpty()) {
             throw new RuntimeException("Livro ou usuário não encontrado");
         }
 
-        Livro livro = livroOptional.get();
-        Usuario usuario = usuarioOptional.get();
+        Livro livroEmprestimo = livroOptional.get();
+        Usuario usuarioEmprestimo = usuarioOptional.get();
 
-        if (livro.estaEmprestadoLivro() || livro.estaReservadoLivro()) {
+        if (livroEmprestimo.estaEmprestadoLivro() || livroEmprestimo.estaReservadoLivro()) {
             throw new RuntimeException("Livro não está disponível para empréstimo");
         }
 
         // Atualiza o status de empréstimo do livro para "Emprestado"
-        livro.setEmprestadoLivro(true);
-        livroRepository.save(livro);
+        livroEmprestimo.setEmprestadoLivro(true);
+        livroRepository.save(livroEmprestimo);
 
         Emprestimo emprestimo = new Emprestimo();
-        emprestimo.setLivroEmprestimo(livro);
-        emprestimo.setUsuarioEmprestimo(usuario);
+        emprestimo.setLivroEmprestimo(livroEmprestimo);
+        emprestimo.setUsuarioEmprestimo(usuarioEmprestimo);
         emprestimo.setStatusEmprestimo("Em andamento");
         emprestimo.setDataEmprestimo(java.time.LocalDate.now());
 

@@ -3,11 +3,9 @@ package com.pucgo.projetointegradorib.controllers;
 import com.pucgo.projetointegradorib.models.Autor;
 import com.pucgo.projetointegradorib.services.AutorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +23,11 @@ public class AutorController {
     @GetMapping("/{id}")
     public ResponseEntity<Autor> buscarAutorPorId(@PathVariable Long id) {
         return ResponseEntity.ok(autorService.buscarPorId(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Autor> cadastrarAutor(@RequestBody Autor autor) {
+        Autor novoAutor = autorService.cadastrarAutor(autor);
+        return new ResponseEntity<>(novoAutor, HttpStatus.CREATED);
     }
 }

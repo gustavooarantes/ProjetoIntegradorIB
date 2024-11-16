@@ -1,6 +1,9 @@
 package com.pucgo.projetointegradorib.controllers;
 
+import com.pucgo.projetointegradorib.dtos.ReservaRequestDTO;
+import com.pucgo.projetointegradorib.models.Livro;
 import com.pucgo.projetointegradorib.models.Reserva;
+import com.pucgo.projetointegradorib.models.Usuario;
 import com.pucgo.projetointegradorib.services.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +17,11 @@ public class ReservaController {
     private ReservaService reservaService;
 
     @PostMapping("/criar")
-    public ResponseEntity<Reserva> criarReserva(@RequestParam Long idLivro, @RequestParam Long idUsuario) {
+    public ResponseEntity<Reserva> criarReserva(@RequestBody ReservaRequestDTO requestDTO) {
         try {
-            Reserva novaReserva = reservaService.criarReserva(idLivro, idUsuario);
+            Livro livro = requestDTO.getLivro();
+            Usuario usuario = requestDTO.getUsuario();
+            Reserva novaReserva = reservaService.criarReserva(livro, usuario);
             return new ResponseEntity<>(novaReserva, HttpStatus.CREATED);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

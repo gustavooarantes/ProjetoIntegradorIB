@@ -1,5 +1,7 @@
 package com.pucgo.projetointegradorib.controllers;
 
+import com.pucgo.projetointegradorib.dtos.EmprestimoRequestDTO;
+import com.pucgo.projetointegradorib.dtos.ReservaRequestDTO;
 import com.pucgo.projetointegradorib.models.Emprestimo;
 import com.pucgo.projetointegradorib.models.Livro;
 import com.pucgo.projetointegradorib.models.Reserva;
@@ -39,20 +41,24 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping("/{idUsuario}/emprestar/{idLivro}")
-    public ResponseEntity<Emprestimo> realizarEmprestimo(@PathVariable Long idUsuario, @PathVariable Long idLivro) {
+    @PostMapping("/emprestar")
+    public ResponseEntity<Emprestimo> realizarEmprestimo(@RequestBody EmprestimoRequestDTO requestDTO) {
         try {
-            Emprestimo emprestimo = usuarioService.realizarEmprestimo(idUsuario, idLivro);
+            Livro livro = requestDTO.getLivro();
+            Usuario usuario = requestDTO.getUsuario();
+            Emprestimo emprestimo = usuarioService.realizarEmprestimo(livro, usuario);
             return new ResponseEntity<>(emprestimo, HttpStatus.CREATED);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PostMapping("/{idUsuario}/reservar/{idLivro}")
-    public ResponseEntity<Reserva> realizarReserva(@PathVariable Long idUsuario, @PathVariable Long idLivro) {
+    @PostMapping("/reservar")
+    public ResponseEntity<Reserva> realizarReserva(@RequestBody ReservaRequestDTO requestDTO) {
         try {
-            Reserva reserva = usuarioService.realizarReserva(idUsuario, idLivro);
+            Livro livro = requestDTO.getLivro();
+            Usuario usuario = requestDTO.getUsuario();
+            Reserva reserva = usuarioService.realizarReserva(livro, usuario);
             return new ResponseEntity<>(reserva, HttpStatus.CREATED);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

@@ -1,9 +1,6 @@
 package com.pucgo.projetointegradorib.services;
 
-import com.pucgo.projetointegradorib.models.Autor;
-import com.pucgo.projetointegradorib.models.Emprestimo;
-import com.pucgo.projetointegradorib.models.Reserva;
-import com.pucgo.projetointegradorib.models.Usuario;
+import com.pucgo.projetointegradorib.models.*;
 import com.pucgo.projetointegradorib.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,26 +42,26 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Emprestimo realizarEmprestimo(Long idUsuario, Long idLivro) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
+    public Emprestimo realizarEmprestimo(Livro livro, Usuario usuario) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getIdUsuario());
 
         if (usuarioOptional.isEmpty()) {
             throw new RuntimeException("Usuário não encontrado");
         }
 
         // Chama o EmprestimoService para criar o empréstimo
-        return emprestimoService.criarEmprestimo(idLivro, idUsuario);
+        return emprestimoService.criarEmprestimo(livro, usuario);
     }
 
     @Transactional
-    public Reserva realizarReserva(Long idUsuario, Long idLivro) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
+    public Reserva realizarReserva(Livro livro, Usuario usuario) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getIdUsuario());
 
         if (usuarioOptional.isEmpty()) {
             throw new RuntimeException("Usuário não encontrado");
         }
 
         // Chama ReservaService para criar a reserva
-        return reservaService.criarReserva(idLivro, idUsuario);
+        return reservaService.criarReserva(livro, usuario);
     }
 }

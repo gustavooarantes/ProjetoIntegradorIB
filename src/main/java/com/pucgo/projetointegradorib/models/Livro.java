@@ -1,10 +1,14 @@
 package com.pucgo.projetointegradorib.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
+@Table(name = "Livros")
 public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,19 +18,20 @@ public class Livro {
     private String tituloLivro;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Genero", nullable = false)
+    @JoinColumn(name = "idGenero", nullable = false)
     private Genero generoLivro;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Autor", nullable = false)
+    @JoinColumn(name = "idAutor", nullable = false)
     private Autor autorLivro;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Editora", nullable = false)
+    @JoinColumn(name = "idEditora", nullable = false)
     private Editora editoraLivro;
 
     @Column(nullable = false)
-    private int anoPublicacaoLivro;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataPublicacaoLivro;
 
     private boolean statusReservaLivro;
 
