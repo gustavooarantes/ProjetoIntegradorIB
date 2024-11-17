@@ -11,5 +11,5 @@
       services (contém efetivamente as lógicas de negócio), controllers (define os endpoints da API REST) e DTOs (facilita a transferência de dados entre camadas).</li>
   </ul>
   <br>
-  <hl></hl>
+  <hr>
 </div>
