@@ -1,5 +1,5 @@
 <div align="center">
-  <h2>Estrutura inicial do projeto</h2>
+  <h3>Estrutura inicial do projeto</h3>
   <p>A partir do site Spring Initializr, podemos gerar um modelo de projeto para ser aberto na IDE de escolha – que neste caso será o IntelliJ IDEA -, que irá conter a estrutura básica do projeto, as dependências instaladas e salvas no arquivo pom.xml, além das configurações iniciais para começar a desenvolver a aplicação.
     Seguem as principais características do projeto gerado para construção da API:</p>
   <ul>
@@ -12,4 +12,8 @@
   </ul>
   <br>
   <hr>
+</div>
+
+<div align="center">
+  <h1>Modelos do banco de dados</h1>
 </div>
