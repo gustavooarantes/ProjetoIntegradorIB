@@ -34,6 +34,7 @@
   <img src="https://github.com/gustavooarantes/ProjetoIntegradorIB/blob/master/Modelos%20-%20Projeto%20Integrador/Primeira%20parte%20modelo%20f%C3%ADsico.png">
   <img src="https://github.com/gustavooarantes/ProjetoIntegradorIB/blob/master/Modelos%20-%20Projeto%20Integrador/Segunda%20parte%20modelo%20f%C3%ADsico.png">
   <img src="https://github.com/gustavooarantes/ProjetoIntegradorIB/blob/master/Modelos%20-%20Projeto%20Integrador/Terceira%20parte%20modelo%20f%C3%ADsico.png">
+  <p>Errata: na linha 34, após DATE não deveria estar presenta a palavra "Usuarios" (a query foi corrigida e o programa executado normalmente após, como é mostrado no vídeo)</p>
   <img src="https://github.com/gustavooarantes/ProjetoIntegradorIB/blob/master/Modelos%20-%20Projeto%20Integrador/Quarta%20parte%20modelo%20f%C3%ADsico.png">
   <br>
   <hr>
